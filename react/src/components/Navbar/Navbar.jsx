@@ -17,7 +17,7 @@ function Navbar() {
           <span className="text-gray-100 font-open mx-5">|</span>
           <Link to="/" className="text-gray-100 font-open text-center hover:bg-primary-shadow hover:text-white px-3 py-2 w-full rounded-md text-sm font-medium">OGLASI</Link>
           <span className="text-gray-100 font-open mx-5">|</span>
-          <Link to="/register" className="text-gray-100 font-open text-center bg-secondary hover:bg-primary-shadow hover:text-white px-3 py-2 w-full rounded-md text-sm font-medium">LOGIN</Link>
+          <Link to="/register" className="text-gray-100 font-open text-center bg-secondary-base hover:bg-secondary-shadow hover:text-white px-3 py-2 w-full rounded-md text-sm font-medium">LOGIN</Link>
         </div>
       </div>
     </div>

@@ -11,7 +11,10 @@ export default {
           base: "#265073",
           shadow: "#1E405C",
         },
-        secondary: "#2D9596",
+        secondary: {
+          base: "#2D9596",
+          shadow: "#288687",
+        },
         accent: "#9AD0C2",
         content: "#F1FADA"
       },
