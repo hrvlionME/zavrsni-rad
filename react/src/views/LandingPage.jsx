@@ -11,7 +11,7 @@ function LandingPage() {
             <div className='flex flex-col justify-center w-full h-screen'>
                 <h1 className='text-center font-content text-white text-5xl m-3'>Job Board</h1>
                 <h3 className='text-center font-content text-white text-xl m-3'>Pronađite svoj savršen posao vec danas!</h3>
-                </div>
+            </div>
         </div>
     </>
   )

@@ -1,0 +1,131 @@
+import { useState } from 'react'
+import Navbar from '../components/Navbar/Navbar'
+import ReactLoading from "react-loading";
+import { Link } from 'react-router-dom';
+
+function Register() {
+    const [progress, setProgress] = useState(0)
+    const [errors, setErrors] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const nextStep = (ev) => {
+        ev.preventDefault()
+        if(progress == 66){
+        setProgress(progress => progress + 34);
+        submitForm()
+        }else
+        setProgress(progress => progress + 33);
+        }
+
+    const roleClicked = (ev) => {
+        ev.preventDefault()
+        setProgress(progress => progress + 33);
+    }
+
+    const prevStep = (ev) => {
+        ev.preventDefault()
+        if(progress == 100)
+        setProgress(progress => progress - 34);
+        else
+        setProgress(progress => progress - 33);
+    }
+
+    const submitForm = () => {
+        setLoading(true)
+
+        //axios.post u users
+
+        setLoading(false)
+    }
+
+  return (
+    <>
+    <Navbar/>
+    <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)] overflow-y-scroll no-scrollbar">
+            <div className='flex flex-col justify-center w-full h-screen'>
+            <div className="relative w-40 h-40 mx-auto">
+            <svg className="w-full h-full" viewBox="0 0 100 100">
+                <circle
+                className="text-gray-200 stroke-current"
+                strokeWidth="10"
+                cx="50"
+                cy="50"
+                r="40"
+                fill="transparent"
+                ></circle>
+                <circle
+                className="text-secondary  progress-ring__circle stroke-current"
+                strokeWidth="10"
+                strokeLinecap="round"
+                cx="50"
+                cy="50"
+                r="40"
+                fill="transparent"
+                strokeDashoffset={`calc(400 - ${progress * 2.5})`}
+                ></circle>
+                <text fill='#fff' x="50" y="50" textAnchor="middle" fontFamily='Verdana' alignmentBaseline="middle">{progress}%</text>
+
+            </svg>
+            </div>
+            {progress == 0 ?
+            <div className='flex flex-col justify-center'>
+                <h1 className="text-white font-open text-5xl mx-auto my-5">Prvo unesite neke Vaše osnovne podatke</h1>
+                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5"type="text" placeholder='Ime i prezime' />
+                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5"type="text" placeholder='Email' />
+                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5"type="text" placeholder='Lozinka' />
+                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5"type="text" placeholder='Potvrda lozinke' />
+            </div> 
+            : progress == 33 ? 
+            <div className="flex justify-center flex-col">
+                        <h1 className="text-white font-open text-5xl mx-auto my-5">Ja sam...</h1>
+            <div className='flex justify-center'>
+                
+                <div className="w-1/3 m-10 relative" onClick={roleClicked}>
+                <img className="opacity-40" src="https://plus.unsplash.com/premium_photo-1683140722537-0eb6f05b57d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <div class="absolute bottom-0 px-4 py-3 bg-primary-shadow/50 w-full flex justify-center">
+                        <h1 class="text-white font-open text-4xl"> POSLODAVAC </h1>
+                    </div>
+                </div>
+                <div className="w-1/3 m-10 relative" onClick={roleClicked}>
+                <img className="opacity-40" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                <div class="absolute bottom-0 px-4 py-3 bg-secondary/50 w-full flex justify-center">
+                        <h1 class="text-white font-open text-4xl"> RADNIK </h1>
+                    </div>
+            </div>
+            </div>
+            </div>
+            : progress == 66 ? <div>{
+            loading ? <ReactLoading className='mx-auto my-5' type='spin'/> :
+            <div className='flex flex-col justify-center'>
+                <h1 className="text-white font-open text-5xl mx-auto my-5">Napravite profil</h1>
+                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5"type="text" placeholder='Unesite vaše vještine odvojene razmakom' />
+                <textarea className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5"type="text" placeholder='Recite nešto više o sebi' rows={6} />
+                <div className="flex justify-center w-full items-center">
+                    <label className="text-center text-white font-open text-3xl mx-5 my-5">Vaša slika profila: </label>
+                    <input className="text-center font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-5 my-5"type="file" placeholder='Unesite vaše vještine odvojene razmakom' />
+                </div>
+            </div>}</div> : <h1 className="text-white font-open text-5xl mx-auto my-5">Registrirali ste se</h1>}
+            <div className="flex justify-center">
+                {progress == 0 ?  <div></div> : progress == 100 ? <Link to="/" className="text-gray-100 font-open text-center text-2xl bg-secondary hover:text-white px-3 py-2 w-1/5 rounded-md font-medium">DALJE</Link> :
+                <div className="bg-secondary rounded-full p-4 mx-56" onClick={prevStep}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#fff" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                    </svg>
+                </div>
+                }
+                {progress == 33 || progress == 100 ? <div></div> :
+                <div className="bg-secondary rounded-full p-4 mx-56" onClick={nextStep}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth={1.5}  stroke="#fff" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                </div>
+                }
+            </div>
+
+            </div>
+        </div>
+    </>
+  )
+}
+
+export default Register

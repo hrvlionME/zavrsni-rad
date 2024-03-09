@@ -17,6 +17,7 @@ export default {
       },
       fontFamily: {
         content: ['Merriweather', 'serif'],
+        open: ['Open Sans', 'sans-serif'],
       },
     },
   },
