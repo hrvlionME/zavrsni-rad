@@ -45,7 +45,6 @@ function Register() {
 
     const submitForm = async () => {
         setLoading(true);
-        console.log(formData);
         await axiosClient
             .post("/signup", formData)
             .then(({ data }) => {
