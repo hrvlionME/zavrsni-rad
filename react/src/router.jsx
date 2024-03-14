@@ -3,6 +3,8 @@ import LandingPage from "./views/LandingPage";
 import Register from "./views/Register";
 import Login from "./views/Login";
 import About from "./views/About";
+import AddJob from "./views/AddJob";
+import Profile from "./views/Profile";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
     {
         path: '/about',
         element: <About/>
+    },
+    {
+        path: '/addjob',
+        element: <AddJob/>
+    },
+    {
+        path: '/profile',
+        element: <Profile/>
     },
 ])
 
