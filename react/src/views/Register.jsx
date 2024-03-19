@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import ReactLoading from "react-loading";
 import { Link } from 'react-router-dom';
@@ -19,6 +19,9 @@ function Register() {
     const [progress, setProgress] = useState(0)
     const [errors, setErrors] = useState('');
     const [loading, setLoading] = useState(false);
+    let file = null;
+
+    const fileInputRef = useRef(null);
 
     const nextStep = (ev) => {
         ev.preventDefault()
@@ -45,12 +48,13 @@ function Register() {
 
     const submitForm = async () => {
         setLoading(true);
+        let userId = 0
         await axiosClient
             .post("/signup", formData)
             .then(({ data }) => {
                 setUser(data.user);
                 setToken(data.token);
-       
+                userId = data.user.id;
             })
             .catch((err) => {
                 const response = err.response;
@@ -58,9 +62,28 @@ function Register() {
                     setErrors(response.data.errors);
                 }
         });
+
+        if (file && file.type.startsWith("image/")) {
+            const data = new FormData();
+            data.append("user_id", userId);
+            data.append("avatar", file);
+            await axiosClient
+                .post(`/uploadavatar`, data)
+                .then(() => {
+                    getUser();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+}
         setLoading(false);
     
     }
+
+    const handleFileChange = (e) => {
+        file = e.target.files[0];
+        console.log("File uploaded:", file);
+      ;}
 
   return (
     <>
@@ -127,7 +150,7 @@ function Register() {
                 <div className="flex justify-center w-full items-center mb-4">
                     <label className="block text-center font-open text-2xl text-white px-4 py-2 bg-secondary-base hover:bg-secondary-shadow rounded-lg cursor-pointer shadow-md hover:bg-primary-shade -200">
                     Kliknite ovdje da postavite sliku vašeg profila
-                    <input type="file" className="hidden" />
+                    <input type="file" ref={fileInputRef} className="hidden"  onChange={handleFileChange} />
                     </label>
                 </div>
             </div>}</div> : <h1 className="text-white font-open text-5xl mx-auto my-5">Registrirali ste se</h1>}
