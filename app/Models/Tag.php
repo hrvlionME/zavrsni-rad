@@ -16,4 +16,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(User::class, "user_tag");
     }
+
+    public function offers()
+    {
+        return $this->belongsToMany(Offer::class, "user_tag");
+    }
 }
