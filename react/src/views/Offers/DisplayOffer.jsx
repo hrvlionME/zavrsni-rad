@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useStateContext } from '../../context/ContextProvider';
 import axiosClient from '../../axios-client';
-import WorkerNavbar from './WorkerNavbar';
-import EmployerNavbar from './EmployerNavbar';
-import Navbar from './Navbar';
+import WorkerOffer from './WorkerOffer';
+import EmployerOffer from './EmployerOffer';
+import GuestOffer from './GuestOffers';
 
 
-function DisplayNavbar() {
+
+function DisplayOffer() {
 
     const { user, setUser } = useStateContext();
 
@@ -22,9 +23,9 @@ function DisplayNavbar() {
 
     return (
         <>
-            {user.role == "radnik" ? <WorkerNavbar/> : user.role == "poslodavac" ? <EmployerNavbar/> : <Navbar/>}
+            {user.role == "radnik" ? <WorkerOffer/> : user.role == "poslodavac" ? <EmployerOffer/> : <GuestOffer/>}
         </>
     )
 }
 
-export default DisplayNavbar
+export default DisplayOffer

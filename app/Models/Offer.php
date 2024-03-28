@@ -10,11 +10,12 @@ class Offer extends Model
     protected $fillable = [
         'title',
         'description',
+        'user_id',
     ];
     use HasFactory;
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, "user_tag");
+        return $this->belongsToMany(Tag::class, "offer_tag");
     }
 }
