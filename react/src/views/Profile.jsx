@@ -3,7 +3,7 @@ import axiosClient from '../axios-client';
 import photo from "../assets/noPhoto.avif";
 import Navbar from '../components/Navbar/Navbar';
 import backgroundSVG from "../assets/wave.svg"; 
-import WorkerNavbar from '../components/Navbar/WorkerNavbar';
+import DisplayNavbar from '../components/Navbar/DisplayNavbar'
 
 function Profile() {
     const [user, setUser] = useState({})
@@ -22,7 +22,7 @@ function Profile() {
 
     return (
         <>
-        <WorkerNavbar/>
+       <DisplayNavbar/>
         <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)] overflow-y-scroll no-scrollbar">
             <div className="absolute inset-0 w-full bg-cover" style={{ backgroundImage: `url(${backgroundSVG})`, backgroundRepeat: "no-repeat", backgroundSize: 'cover', backgroundPosition: 'center calc(0% - 200px)'}}>
                 <div className='flex items-center justify-center my-32'>

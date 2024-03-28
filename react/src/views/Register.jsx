@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import DisplayNavbar from '../components/Navbar/DisplayNavbar'
 import ReactLoading from "react-loading";
 import { Link } from 'react-router-dom';
 import axiosClient from '../axios-client';
@@ -87,7 +87,7 @@ function Register() {
 
   return (
     <>
-    <Navbar/>
+    <DisplayNavbar/>
     <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)] overflow-y-scroll no-scrollbar">
             <div className='flex flex-col justify-center w-full h-screen'>
             <div className="relative w-40 h-40 mx-auto">

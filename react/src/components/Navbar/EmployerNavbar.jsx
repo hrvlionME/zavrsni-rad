@@ -4,7 +4,7 @@ import { useStateContext } from '../../context/ContextProvider';
 import photo from "../../assets/noPhoto.avif";
 import axiosClient from '../../axios-client';
 
-function WorkerNavbar() {
+function EmployerNavbar() {
 
   const [isClicked, setIsClicked] = useState(false);
   const { user, token, setUser, setToken, } = useStateContext();
@@ -59,4 +59,4 @@ function WorkerNavbar() {
   )
 }
 
-export default WorkerNavbar
+export default EmployerNavbar
