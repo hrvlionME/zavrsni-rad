@@ -30,7 +30,7 @@ function Navbar() {
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>
           <h1 className="text-gray-100 font-content text-center font-bold text-lg w-full hidden md:block">JOB BOARD</h1>
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>
-          <Link to="/" className="text-gray-100 font-open text-center hover:bg-primary-shadow hover:text-white px-3 py-2 my-1 w-full rounded-md text-sm font-medium">OGLASI</Link>
+          <Link to="/offers" className="text-gray-100 font-open text-center hover:bg-primary-shadow hover:text-white px-3 py-2 my-1 w-full rounded-md text-sm font-medium">OGLASI</Link>
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>
           <Link to="/login" className="text-gray-100 font-open text-center bg-secondary-base hover:bg-secondary-shadow hover:text-white px-3 py-2 my-1 w-full rounded-md text-sm font-medium">LOGIN</Link>
         </div>

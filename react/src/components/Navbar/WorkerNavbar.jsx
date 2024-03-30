@@ -46,7 +46,7 @@ function WorkerNavbar() {
               {isClicked && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                   <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJ PROFIL</Link>
-                  <Link to="/about" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">POTRAŽI OGLASE</Link>
+                  <Link to="/offers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">POTRAŽI OGLASE</Link>
                   <Link to="/logout" onClick={onLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">LOGOUT</Link>
                 </div>
               )}

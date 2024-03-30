@@ -5,6 +5,7 @@ import Login from "./views/Login";
 import About from "./views/About";
 import AddJob from "./views/AddJob";
 import Profile from "./views/Profile";
+import AllOffers from "./views/Offers/AllOffers";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: '/profile',
         element: <Profile/>
+    },
+    {
+        path: '/offers',
+        element: <AllOffers/>
     },
 ])
 

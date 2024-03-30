@@ -11,6 +11,13 @@ use App\Models\Tag;
 class OfferController extends Controller
 {
 
+    public function show()
+    {
+
+        $offers = Offer::all();
+        return OfferResource::collection($offers);
+    }
+
     public function addjob(OfferRequest $request)
     {
         $offer = Offer::create($request->all());

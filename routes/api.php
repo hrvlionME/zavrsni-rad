@@ -25,6 +25,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::post('/addoffer', [OfferController::class, 'addjob']);
 });
 
+
+Route::get('/showoffers', [OfferController::class, 'show']);
+Route::get('/showusers', [AuthController::class, 'show']);
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/uploadavatar', [FilesController::class, 'store']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\SignupRequest;
+use App\Http\Resources\UserResource;
 use App\Models\Tag;
 use App\Models\User;
 use Carbon\Carbon;
@@ -65,5 +66,11 @@ class AuthController extends Controller
         $user = $request->user();
         $user->currentAccessToken()->delete();
         return response('', 204);
+    }
+
+    public function show()
+    {
+        $users = User::all();
+        return UserResource::collection($users);
     }
 }
