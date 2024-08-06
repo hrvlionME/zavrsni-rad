@@ -3,24 +3,40 @@ import { Link, Navigate } from 'react-router-dom'
 import { useStateContext } from '../../context/ContextProvider';
 import photo from "../../assets/noPhoto.avif";
 import axiosClient from '../../axios-client';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EmployerNavbar() {
 
   const [isClicked, setIsClicked] = useState(false);
   const { user, token, setUser, setToken, } = useStateContext();
+  const [applications, setApplications] = useState([]);
 
   useEffect(() => {
     axiosClient.get("/user").then(({ data }) => {
         setUser(data);
     });
+    fetchApplications();
 }, []);
+
+  const fetchApplications = async () => {
+
+  await axiosClient.get("/applications").then(({ data }) => {
+      setApplications(data.data.filter(app => app.opened == false));
+  });
+  
+  };
 
   const onLogout = (e) => {
     e.preventDefault();
 
     axiosClient.post("/logout").then(() => {
-        setUser({});
+        setUser(null);
         setToken(null);
+        toast.success("Odjavili ste se", {
+          position: "bottom-right",
+          theme: "dark",
+      });
         <Navigate to="/" />;
     });
 };
@@ -36,7 +52,7 @@ function EmployerNavbar() {
     <div className="bg-primary-base shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <h1 className="text-gray-100 font-content text-center font-bold text-lg">JOB BOARD</h1>
+          <h1 className="text-gray-100 font-content text-center font-bold text-lg">TražimPosao</h1>
           <div className="flex items-center">
             <span className="text-gray-100 mr-2">Logged in as {user.name}</span>
             <div className="relative">
@@ -46,8 +62,17 @@ function EmployerNavbar() {
               {isClicked && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                   <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJ PROFIL</Link>
+                  <Link to="/notifications" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 flex justify-between">OBAVIJESTI
+                  { applications.length > 0 &&
+                    <div className='bg-secondary-base rounded-full px-2'>
+                      <p className="text-white inline">{applications.length}</p>
+                    </div> }
+                  </Link>
+                  <Link to="/workers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">PRETRAGA RADNIKA</Link>
+                  <Link to="/offers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">OGLASI</Link>
+                  <Link to="/myoffers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJI OGLASI</Link>
                   <Link to="/addjob" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">NAPRAVI OGLAS</Link>
-                  <Link to="/logout" onClick={onLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">LOGOUT</Link>
+                  <Link to="/logout" onClick={onLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ODJAVA</Link>
                 </div>
               )}
             </div>

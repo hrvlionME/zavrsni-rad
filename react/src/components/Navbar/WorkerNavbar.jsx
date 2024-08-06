@@ -3,6 +3,8 @@ import { Link, Navigate } from 'react-router-dom'
 import { useStateContext } from '../../context/ContextProvider';
 import photo from "../../assets/noPhoto.avif";
 import axiosClient from '../../axios-client';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function WorkerNavbar() {
 
@@ -19,8 +21,12 @@ function WorkerNavbar() {
     e.preventDefault();
 
     axiosClient.post("/logout").then(() => {
-        setUser({});
+        setUser(null);
         setToken(null);
+        toast.success("Odjavili ste se", {
+          position: "bottom-right",
+          theme: "dark",
+      });
         <Navigate to="/" />;
     });
 };
@@ -36,7 +42,7 @@ function WorkerNavbar() {
     <div className="bg-primary-base shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <h1 className="text-gray-100 font-content text-center font-bold text-lg">JOB BOARD</h1>
+          <h1 className="text-gray-100 font-content text-center font-bold text-lg">TražimPosao</h1>
           <div className="flex items-center">
             <span className="text-gray-100 mr-2">Logged in as {user.name}</span>
             <div className="relative">
@@ -47,7 +53,8 @@ function WorkerNavbar() {
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                   <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJ PROFIL</Link>
                   <Link to="/offers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">POTRAŽI OGLASE</Link>
-                  <Link to="/logout" onClick={onLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">LOGOUT</Link>
+                  <Link to="/offers/following" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">PRAĆENI OGLASI</Link>
+                  <Link to="/logout" onClick={onLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ODJAVA</Link>
                 </div>
               )}
             </div>

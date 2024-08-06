@@ -2,10 +2,14 @@ import { useState, useEffect } from 'react'
 import DisplayNavbar from '../components/Navbar/DisplayNavbar'
 import { useStateContext } from '../context/ContextProvider';
 import axiosClient from '../axios-client';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddJob() {
 
   const { user, setUser } = useStateContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
       fetchUserData();
@@ -27,12 +31,21 @@ function AddJob() {
     ev.preventDefault()
     await axiosClient
     .post("/addoffer", formData)
-    .then()
+    .then(() => {
+      toast.success("Uspješno ste se postavili oglas", {
+        position: "bottom-right",
+        theme: "dark",
+    });
+    })
     .catch((err) => {
         const response = err.response;
         if (response && response.status === 422) {
-            setErrors(response.data.errors);
+          toast.error("Greška: " + err, {
+            position: "bottom-right",
+            theme: "dark",
+        });
         }})
+    navigate(`/offers`);
   }
 
   return (

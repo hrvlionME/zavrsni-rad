@@ -24,6 +24,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'role' => $data['role'],
             'description' => $data['description'],
             'password' => bcrypt($data['password']),
@@ -70,7 +71,12 @@ class AuthController extends Controller
 
     public function show()
     {
-        $users = User::all();
+        $users = User::with('tags')->get();
         return UserResource::collection($users);
+    }
+
+    public function getuser($id){
+        $user = User::with('tags')->find($id);
+        return new UserResource($user);
     }
 }

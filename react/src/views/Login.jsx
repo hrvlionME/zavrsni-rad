@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import DisplayNavbar from '../components/Navbar/DisplayNavbar'
-import ReactLoading from "react-loading";
 import { Link, Navigate } from 'react-router-dom';
 import axiosClient from '../axios-client';
 import { useStateContext } from '../context/ContextProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
     const { setUser, setToken, user, token } = useStateContext();
-    const [errors, setErrors] = useState('');
-    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
       email: '',
@@ -26,12 +25,18 @@ function Login() {
       .then(({ data }) => {
           setUser(data.user);
           setToken(data.token);
- 
+          toast.success("Uspješno ste se prijavili", {
+              position: "bottom-right",
+              theme: "dark",
+          });
       })
       .catch((err) => {
           const response = err.response;
           if (response && response.status === 422) {
-              setErrors(response.data.errors);
+              toast.error("Greška: " + err, {
+                  position: "bottom-right",
+                  theme: "dark",
+              });
           }
   });
     }

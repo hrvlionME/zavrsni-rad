@@ -4,18 +4,15 @@ import DisplayNavbar from "../../components/Navbar/DisplayNavbar";
 import { Link } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner';
 import { useStateContext } from "../../context/ContextProvider";
-import { FiMinusCircle, FiPlusCircle, FiSearch } from "react-icons/fi";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
-function AllOffers() {
+function MyOffers() {
     const { user, setUser } = useStateContext();
     const [offers, setOffers] = useState([]);
     const [employers, setEmployers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [selectedOfferId, setSelectedOfferId] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         fetchOffers();
@@ -31,7 +28,7 @@ function AllOffers() {
     const fetchOffers = async () => {
         setLoading(true);
         await axiosClient.get("/offers").then(({ data }) => {
-            setOffers(data.data);
+            setOffers(data.data.filter(offer => offer.employer_id === user.id));
         });
         await axiosClient.get("/users").then(({ data }) => {
             setEmployers(data.data);
@@ -53,10 +50,6 @@ function AllOffers() {
         axiosClient.delete(`/offer/${selectedOfferId}`).then(() => {
             fetchOffers();
             setShowModal(false);
-            toast.success("Oglas izbrisan", {
-                position: "bottom-right",
-                theme: "dark",
-            });
         });
     };
 
@@ -81,19 +74,7 @@ function AllOffers() {
                     </div>
                     : 
                     <div>
-                        <div className="flex justify-center mt-14">
-                            <div className="relative w-3/4 lg:w-1/2">
-                                <input
-                                    type="text"
-                                    className="w-full px-4 py-2 pl-10 pr-4 text-2xl bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-primary-base"
-                                    placeholder="Pretraži oglase..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                                <FiSearch className="absolute left-3 top-2/4 transform -translate-y-2/4 text-primary-base text-2xl" />
-                            </div>
-                        </div>
-                        <ul className="mt-8">
+                        <ul className="mt-24">
                             <li className='bg-primary-base py-4 my-4 px-20 mx-10 lg:mx-32 rounded-md flex justify-center lg:justify-between'> 
                                 <p className='text-white font-open text-2xl'>Naslov oglasa</p>
                                 <div className="w-1/4 hidden lg:flex justify-around items-center">
@@ -105,18 +86,14 @@ function AllOffers() {
                                         </svg>
                                     </span>
                                     <span className='text-white font-open text-2xl'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                         </svg>
                                     </span>
                                     {user.role === "poslodavac" ? <p className='text-white font-open text-2xl'>Akcije</p> : null}
                                 </div>
                             </li>
-                            {offers.filter(offer => {
-                                const titleMatch = offer.title.toLowerCase().includes(searchTerm.toLowerCase());
-                                const tagMatch = offer.tags.some(tag => tag.name.toLowerCase().includes(searchTerm.toLowerCase()));
-                                return titleMatch || tagMatch;
-                            }).map((offer, index) => (
+                            {offers.map((offer, index) => (
                                 <li key={index} className='bg-gray-200 py-4 my-4 px-20 mx-10 lg:mx-32 rounded-md shadow-md flex justify-center lg:justify-between'> 
                                     <Link to={`/offers/${offer.id}`} className='text-primary-base font-open text-2xl hover:underline'>{offer.title}</Link>
                                     <div className="w-1/4 hidden lg:flex lg:justify-around">
@@ -127,7 +104,7 @@ function AllOffers() {
                                             <div className='bg-red-500 rounded-full hover:bg-red-700 cursor-pointer h-8 w-8 flex items-center justify-center' onClick={() => confirmDeleteOffer(offer.id)}>
                                                 <FiMinusCircle className='text-white font-open text-2xl' /> 
                                             </div>
-                                        ) : <div className="h-8 w-8"></div>}
+                                        ) : null}
                                     </div>
                                 </li>
                             ))}
@@ -158,19 +135,19 @@ function AllOffers() {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-8 rounded-lg shadow-lg">
-                        <h2 className="text-xl mb-4">Jeste li sigurni da želite izbrisati ovaj oglas?</h2>
+                        <h2 className="text-xl mb-4">Are you sure you want to delete this offer?</h2>
                         <div className="flex justify-end">
                             <button
                                 className="bg-red-500 text-white px-4 py-2 rounded mr-2"
                                 onClick={deleteOffer}
                             >
-                                Da
+                                Yes
                             </button>
                             <button
                                 className="bg-gray-300 text-black px-4 py-2 rounded"
                                 onClick={() => setShowModal(false)}
                             >
-                                Ne
+                                No
                             </button>
                         </div>
                     </div>
@@ -180,4 +157,4 @@ function AllOffers() {
     );
 }
 
-export default AllOffers;
+export default MyOffers;

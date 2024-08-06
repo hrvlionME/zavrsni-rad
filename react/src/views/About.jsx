@@ -9,9 +9,15 @@ function About() {
     <>
     <DisplayNavbar/>
     <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)]">
-            <div className='flex flex-col justify-center w-2/3 h-screen mx-auto'>
-                <h1 className='text-center font-content text-white text-5xl m-3'>Job Board</h1>
-                <h3 className='text-center font-content text-white text-xl m-3'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias incidunt fuga, ducimus ea animi totam voluptate fugit! Rem, atque voluptates quidem eveniet, alias aspernatur deleniti sunt delectus iure expedita vel, explicabo ab esse. Incidunt nostrum deserunt, similique voluptatum at, rerum et ipsa maxime voluptates iusto quisquam dolor cumque consequatur consequuntur, reprehenderit quia porro facilis dignissimos velit quos aperiam illo iure deleniti eaque. Fugit ex rerum iure ipsum, voluptatibus, veritatis enim consequuntur in error, neque corporis reiciendis deleniti illum dolore autem inventore totam repudiandae omnis. Possimus ex eum dicta esse molestiae eligendi veniam repellat iusto earum eveniet nihil, vero aperiam unde deserunt optio autem, error corporis necessitatibus itaque est harum deleniti perspiciatis. Quo quis inventore quos cum, sunt voluptates nobis dicta quibusdam rem odit id, assumenda esse error labore pariatur tempore ipsam doloremque eius. Debitis culpa doloribus quod suscipit atque? Accusamus officia earum necessitatibus quia libero ut recusandae deleniti ipsa odio placeat nostrum voluptas repudiandae in sit numquam ipsum laboriosam voluptatum molestiae ipsam ab, incidunt facilis porro dicta dolorum. Esse et quod eaque quia porro incidunt perferendis fugit at suscipit dolor eius, debitis assumenda consequatur maiores doloribus sed. Reiciendis blanditiis facilis quis eos corrupti dicta! Sapiente, est! Mollitia labore voluptatem laboriosam!</h3>
+            <div className='flex flex-col justify-center w-7/12 h-screen mx-auto'>
+                <h1 className='text-center font-content text-white text-5xl m-3'>TražimPosao</h1>
+                <h3 className='text-center text-ju font-content text-white text-xl m-3'>U današnjem dinamičnom tržištu rada, vjerujemo da je pronalaženje pravog posla ključ uspjeha i zadovoljstva u karijeri. Zato smo stvorili TražimPosao – platformu koja koristi najnovije tehnologije i pristupe kako bi vam pružila najbolje mogućnosti za zapošljavanje.</h3>
+
+<h4 className='text-center font-content text-white font-bold text-2xl mt-20 mb-4'>Što nas izdvaja?</h4>
+
+<h2 className='text-justify font-content text-white text-lg m-2'>Jednostavno pretraživanje: Naša intuitivna pretraga omogućuje vam da brzo pronađete poslove koji odgovaraju vašim kriterijima.</h2>
+<h2 className='text-justify font-content text-white text-lg m-2'>Personalizirani pristup: Uživajte u personaliziranim preporukama posla na temelju vaših preferencija i prethodnog iskustva.</h2>
+<h3 className='text-center font-content text-white text-xl mt-32'>Hvala vam što ste odabrali TražimPosao kao vašeg partnera u traženju posla. Radujemo se što ćemo vam pomoći na putu do vaše sljedeće velike prilike!</h3>
             </div>
         </div>
     </>

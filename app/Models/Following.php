@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Application extends Model
+class Following extends Model
 {
     protected $fillable = [
-        'title',
-        'description',
         'user_id',
         'offer_id',
     ];
@@ -23,5 +21,5 @@ class Application extends Model
     public function offer()
     {
         return $this->belongsTo(Offer::class);
-    }
+    }  
 }

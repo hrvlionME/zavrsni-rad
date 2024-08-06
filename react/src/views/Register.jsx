@@ -4,11 +4,15 @@ import ReactLoading from "react-loading";
 import { Link } from 'react-router-dom';
 import axiosClient from '../axios-client';
 import { useStateContext } from '../context/ContextProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Register() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        phone: '',
         password: '',
         password_confirmation: '',
         role: '',
@@ -20,6 +24,9 @@ function Register() {
     const [errors, setErrors] = useState('');
     const [loading, setLoading] = useState(false);
     let file = null;
+
+    const isValidStep1 = formData.name && formData.email && formData.phone && formData.password && formData.password_confirmation;
+    const isValidStep3 = formData.description && formData.tags;
 
     const fileInputRef = useRef(null);
 
@@ -55,11 +62,18 @@ function Register() {
                 setUser(data.user);
                 setToken(data.token);
                 userId = data.user.id;
+                toast.success("Uspješno ste se registrirali", {
+                    position: "bottom-right",
+                    theme: "dark",
+                });
             })
             .catch((err) => {
                 const response = err.response;
                 if (response && response.status === 422) {
-                    setErrors(response.data.errors);
+                    toast.error("Greška: " + err, {
+                        position: "bottom-right",
+                        theme: "dark",
+                    });
                 }
         });
 
@@ -73,7 +87,10 @@ function Register() {
                     getUser();
                 })
                 .catch((err) => {
-                    console.log(err);
+                    toast.error("Greška: " + err, {
+                        position: "bottom-right",
+                        theme: "dark",
+                    });
                 });
 }
         setLoading(false);
@@ -82,8 +99,24 @@ function Register() {
 
     const handleFileChange = (e) => {
         file = e.target.files[0];
-        console.log("File uploaded:", file);
+        toast.success("Korisnička slika postavljena", {
+            position: "bottom-right",
+            theme: "dark",
+        });
       ;}
+
+        const handleFocus = (e) => {
+        const field = e.target.name;
+        setErrors({ ...errors, [field]: false });
+    };
+
+    const handleBlur = (e) => {
+        const field = e.target.name;
+        if (!formData[field]) {
+            setErrors({ ...errors, [field]: true });
+        }
+    };
+
 
   return (
     <>
@@ -114,14 +147,75 @@ function Register() {
 
             </svg>
             </div>
-            {progress == 0 ?
-            <div className='flex flex-col justify-center'>
-                <h1 className="text-white font-open text-5xl mx-auto my-5">Prvo unesite neke Vaše osnovne podatke</h1>
-                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5 shadow-md" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" placeholder='Ime i prezime' />
-                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5 shadow-md" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} type="text" placeholder='Email' />
-                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5 shadow-md" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} type="password" placeholder='Lozinka' />
-                <input className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5 shadow-md" value={formData.password_confirmation} onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })} type="password" placeholder='Potvrda lozinke' />
-            </div> 
+            {progress === 0 ?
+                        <div className='flex flex-col justify-center'>
+                            <h1 className="text-white font-open text-5xl mx-auto my-5">Prvo unesite neke Vaše osnovne podatke</h1>
+                            <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                                <input
+                                    className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.name && errors.name ? 'border-2 border-red-500' : ''}`}
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    placeholder='Ime i prezime'
+                                />
+                                <p className={`text-red-500 text-left ${!formData.name && errors.name ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                            </div>
+                            <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                                <input
+                                    className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.email && errors.email ? 'border-2 border-red-500' : ''}`}
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    placeholder='Email'
+                                />
+                                <p className={`text-red-500 text-left ${!formData.email && errors.email ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                            </div>
+                            <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                                <input
+                                    className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.phone && errors.phone ? 'border-2 border-red-500' : ''}`}
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    placeholder='Telefon'
+                                />
+                                <p className={`text-red-500 text-left ${!formData.phone && errors.phone ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                            </div>
+                            <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                                <input
+                                    className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.password && errors.password ? 'border-2 border-red-500' : ''}`}
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                    type="password"
+                                    placeholder='Lozinka'
+                                />
+                                <p className={`text-red-500 text-left ${!formData.password && errors.password ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                            </div>
+                            <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                                <input
+                                    className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.password_confirmation && errors.password_confirmation ? 'border-2 border-red-500' : ''}`}
+                                    name="password_confirmation"
+                                    value={formData.password_confirmation}
+                                    onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                    type="password"
+                                    placeholder='Potvrda lozinke'
+                                />
+                                <p className={`text-red-500 text-left ${!formData.password_confirmation && errors.password_confirmation ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                            </div>
+                        </div>
             : progress == 33 ? 
             <div className="flex justify-center flex-col">
                         <h1 className="text-white font-open text-5xl mx-auto my-5">Ja sam...</h1>
@@ -145,10 +239,16 @@ function Register() {
             loading ? <ReactLoading className='mx-auto my-5' type='spin'/> :
             <div className='flex flex-col justify-center'>
                 <h1 className="text-white font-open text-5xl mx-auto my-5">Napravite profil</h1>
-                <input className="font-open text-1xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5 shadow-md"type="text" placeholder='Unesite vaše vještine odvojene razmakom npr: vozač kuhar nastavnik'  value={formData.tags} onChange={(e) => setFormData({ ...formData, tags: e.target.value })}/>
-                <textarea className="font-open text-2xl px-2 py-4 lg:w-1/3 md:w-1/2 sm:w-3/4 rounded-lg mx-auto my-5 shadow-md"type="text" placeholder='Recite nešto više o sebi' rows={6}  value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
+                <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                <input className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.tags && errors.tags? 'border-2 border-red-500' : ''}`} type="text" placeholder='Unesite vaše vještine odvojene razmakom npr: vozač kuhar nastavnik'  value={formData.tags} onChange={(e) => setFormData({ ...formData, tags: e.target.value })} onFocus={handleFocus} onBlur={handleBlur} name="tags"/>
+                <p className={`text-red-500 text-left ${!formData.tags && errors.tags ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                </div>
+                <div className="relative mx-auto lg:w-1/3 md:w-1/2 sm:w-3/4 mt-5">
+                <textarea className={`font-open text-2xl px-2 py-4 w-full rounded-lg shadow-md ${!formData.description && errors.description? 'border-2 border-red-500' : ''}`}type="text" placeholder='Recite nešto više o sebi' rows={6}  value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} onFocus={handleFocus} onBlur={handleBlur} name="description"/>
+                <p className={`text-red-500 text-left ${!formData.description && errors.description ? 'visible' : 'invisible'}`}>Ovo polje je obvezno</p>
+                </div>
                 <div className="flex justify-center w-full items-center mb-4">
-                    <label className="block text-center font-open text-2xl text-white px-4 py-2 bg-secondary-base hover:bg-secondary-shadow rounded-lg cursor-pointer shadow-md hover:bg-primary-shade -200">
+                    <label className="block text-center font-open text-2xl text-white px-4 py-2 mt-5 bg-secondary-base hover:bg-secondary-shadow rounded-lg cursor-pointer shadow-md hover:bg-primary-shade -200">
                     Kliknite ovdje da postavite sliku vašeg profila
                     <input type="file" ref={fileInputRef} className="hidden"  onChange={handleFileChange} />
                     </label>
@@ -163,11 +263,11 @@ function Register() {
                 </div>
                 }
                 {progress == 33 || progress == 100 ? <div></div> :
-                <div className="bg-secondary-base hover:bg-secondary-shadow rounded-full p-4 mx-56 cursor-pointer shadow-md" onClick={nextStep}>
+                <button className="bg-secondary-base hover:bg-secondary-shadow rounded-full p-4 mx-56 cursor-pointer shadow-md disabled:opacity-50" onClick={nextStep} disabled={progress === 66 && !isValidStep3 || progress === 0 && !isValidStep1}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth={1.5}  stroke="#fff" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                     </svg>
-                </div>
+                </button>
                 }
             </div>
 

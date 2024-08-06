@@ -4,13 +4,14 @@ import photo from "../assets/noPhoto.avif";
 import backgroundSVG from "../assets/wave.svg"; 
 import DisplayNavbar from '../components/Navbar/DisplayNavbar';
 import { ThreeDots } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-function Profile() {
+function UserProfile() {
     const [user, setUser] = useState({});
     const [tags, setTags] = useState([]);
     const [loading, setLoading] = useState(true);
     const [offers, setOffers] = useState([]);
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,12 +23,11 @@ function Profile() {
     
     const fetchUserData = async () => {
         try {
-            const response = await axiosClient.get("/user");
-            setUser(response.data);
-            
-            if (response.data.id) {
-                await fetchTags(response.data.id);
-                await fetchOffers(response.data.id, response.data.role);
+            const response = await axiosClient.get(`/user/${id}`);
+            setUser(response.data.data);
+            if (response.data.data.id) {
+                await fetchTags(response.data.data.id);
+                await fetchOffers(response.data.data.id, response.data.data.role);
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -35,11 +35,11 @@ function Profile() {
         setLoading(false);
     };
 
-    const fetchOffers = async (userId, role) => {
+    const fetchOffers = async (id, role) => {
         try {
             const response = role === "poslodavac" ? 
-                await axiosClient.get(`/getuseroffers/${userId}`) : 
-                await axiosClient.get(`/getfollowingoffers/${userId}`);
+                await axiosClient.get(`/getuseroffers/${id}`) : 
+                await axiosClient.get(`/getfollowingoffers/${id}`);
             
             setOffers(response.data.data);
         } catch (error) {
@@ -47,15 +47,17 @@ function Profile() {
         }
     };
 
-    const fetchTags = async (userId) => {
+    const fetchTags = async (id) => {
         try {
-            const response = await axiosClient.get(`/usertags/${userId}`);
+            const response = await axiosClient.get(`/usertags/${id}`);
             setTags(response.data.tags);
+            setLoading(false);
         } catch (error) {
             console.error("Error fetching tags:", error);
         }
     };
-    
+
+
     return (
         <>
             <DisplayNavbar />
@@ -89,7 +91,7 @@ function Profile() {
                     }
                     <div className='flex items-center justify-around'>
                         <div className='bg-gray-200 py-4 w-1/2 px-8 rounded-md shadow-md'> 
-                        <p className='text-primary-base font-bold text-2xl text-center'>{user.role === "poslodavac" ? "Oglasi" : "Praćeni Oglasi"}</p>
+                            <p className='text-primary-base font-bold text-2xl text-center'>{user.role === "poslodavac" ? "Oglasi" : "Praćeni Oglasi"}</p>
                             <div className='flex flex-col items-start'>
                                 {offers.map(offer => (
                                     <Link key={offer.id} to={`/offers/${offer.id}`} className='text-primary-base text-lg text-left py-3 hover:underline'>
@@ -105,4 +107,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default UserProfile;
