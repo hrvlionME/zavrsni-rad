@@ -26,11 +26,11 @@ function Workers() {
     const fetchOffers = async () => {
         setLoading(true);
         await axiosClient.get("/users").then(({ data }) => {
-            setEmployers(data.data);
+            const filteredEmployers = data.data.filter(employer => employer.role === "radnik").sort((a, b) => b.id - a.id);
+            setEmployers(filteredEmployers);
         });
         setLoading(false);
     };
-
     return (
         <>
             <DisplayNavbar />

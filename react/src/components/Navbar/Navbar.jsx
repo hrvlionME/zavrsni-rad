@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom'
 
 function Navbar() {
@@ -28,7 +29,10 @@ function Navbar() {
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>
           <Link to="/about" className="text-gray-100 font-open text-center hover:bg-primary-shadow hover:text-white px-3 py-2 my-1 w-full rounded-md text-sm font-medium">O NAMA</Link>
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>
+          <div className='flex justify-center items-center'>
+          <FiSearch className='text-white text-2xl mr-2' />
           <h1 className="text-gray-100 font-content text-center font-bold text-lg w-full hidden md:block">TražimPosao</h1>
+          </div>
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>
           <Link to="/offers" className="text-gray-100 font-open text-center hover:bg-primary-shadow hover:text-white px-3 py-2 my-1 w-full rounded-md text-sm font-medium">OGLASI</Link>
           <span className="text-gray-100 font-open mx-5 hidden md:block">|</span>

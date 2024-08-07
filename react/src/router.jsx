@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 element: <RoleRoute role="radnik" />,
                 children: [
                     { path: 'offers/following', element: <FollowingOffers /> },
-                    { path: 'offers/apply', element: <SendApplication /> },
+                    { path: 'offers/:id/apply', element: <SendApplication /> },
                 ]
             }
         ]

@@ -31,7 +31,8 @@ function AllOffers() {
     const fetchOffers = async () => {
         setLoading(true);
         await axiosClient.get("/offers").then(({ data }) => {
-            setOffers(data.data);
+            const sortedOffers = data.data.sort((a, b) => b.id - a.id);
+            setOffers(sortedOffers);
         });
         await axiosClient.get("/users").then(({ data }) => {
             setEmployers(data.data);

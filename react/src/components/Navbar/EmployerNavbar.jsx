@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useStateContext } from '../../context/ContextProvider';
 import photo from "../../assets/noPhoto.avif";
 import axiosClient from '../../axios-client';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FiSearch } from 'react-icons/fi';
 
 function EmployerNavbar() {
 
   const [isClicked, setIsClicked] = useState(false);
   const { user, token, setUser, setToken, } = useStateContext();
   const [applications, setApplications] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axiosClient.get("/user").then(({ data }) => {
@@ -52,7 +55,12 @@ function EmployerNavbar() {
     <div className="bg-primary-base shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
+        <div className='flex justify-center items-center hover:cursor-pointer' onClick={() => {
+          navigate("/")
+        }}>
+        <FiSearch className='text-white text-2xl mr-2' />
           <h1 className="text-gray-100 font-content text-center font-bold text-lg">TražimPosao</h1>
+        </div>
           <div className="flex items-center">
             <span className="text-gray-100 mr-2">Logged in as {user.name}</span>
             <div className="relative">

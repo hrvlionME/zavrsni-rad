@@ -29,7 +29,7 @@ function Notifications() {
         setLoading(true);
 
         await axiosClient.get("/applications").then(({ data }) => {
-            setApplications(data.data);
+            setApplications(data.data.sort((a, b) => b.id - a.id));
         });
 
         await axiosClient.get("/users").then(({ data }) => {

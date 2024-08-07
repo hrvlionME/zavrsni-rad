@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import DisplayNavbar from '../components/Navbar/DisplayNavbar'
+import { FiSearch } from 'react-icons/fi'
 
 
 function About() {
@@ -10,7 +11,10 @@ function About() {
     <DisplayNavbar/>
     <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)]">
             <div className='flex flex-col justify-center w-7/12 h-screen mx-auto'>
+            <div className='flex justify-center items-center'>
+                <FiSearch className='text-white text-5xl mr-2' />
                 <h1 className='text-center font-content text-white text-5xl m-3'>TražimPosao</h1>
+            </div>
                 <h3 className='text-center text-ju font-content text-white text-xl m-3'>U današnjem dinamičnom tržištu rada, vjerujemo da je pronalaženje pravog posla ključ uspjeha i zadovoljstva u karijeri. Zato smo stvorili TražimPosao – platformu koja koristi najnovije tehnologije i pristupe kako bi vam pružila najbolje mogućnosti za zapošljavanje.</h3>
 
 <h4 className='text-center font-content text-white font-bold text-2xl mt-20 mb-4'>Što nas izdvaja?</h4>
