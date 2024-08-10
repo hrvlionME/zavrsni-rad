@@ -123,30 +123,6 @@ function Register() {
     <DisplayNavbar/>
     <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)] overflow-y-scroll no-scrollbar">
             <div className='flex flex-col justify-center w-full h-screen'>
-            <div className="relative w-40 h-40 mx-auto">
-            <svg className="w-full h-full" viewBox="0 0 100 100">
-                <circle
-                className="text-gray-200 stroke-current"
-                strokeWidth="10"
-                cx="50"
-                cy="50"
-                r="40"
-                fill="transparent"
-                ></circle>
-                <circle
-                className="text-secondary-base  progress-ring__circle stroke-current"
-                strokeWidth="10"
-                strokeLinecap="round"
-                cx="50"
-                cy="50"
-                r="40"
-                fill="transparent"
-                strokeDashoffset={`calc(400 - ${progress * 2.5})`}
-                ></circle>
-                <text fill='#fff' x="50" y="50" textAnchor="middle" fontFamily='Verdana' alignmentBaseline="middle">{progress}%</text>
-
-            </svg>
-            </div>
             {progress === 0 ?
                         <div className='flex flex-col justify-center'>
                             <h1 className="text-white font-open text-5xl mx-auto my-5">Prvo unesite neke Vaše osnovne podatke</h1>

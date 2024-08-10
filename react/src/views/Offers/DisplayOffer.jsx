@@ -42,7 +42,7 @@ function DisplayOffer() {
 
     return (
         <>
-            {user.role == "radnik" ? <WorkerOffer/> : user.role == "poslodavac" && offer.employer_id == user.id ? <EmployerOffer/> : <GuestOffer/>}
+            {user?.role == "radnik" ? <WorkerOffer/> : user?.role == "poslodavac" && offer.employer_id == user.id ? <EmployerOffer/> : <GuestOffer/>}
         </>
     )
 }

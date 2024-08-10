@@ -34,13 +34,15 @@ const router = createBrowserRouter([
         path: '/offers',
         element: <AllOffers />
     },
+    {   path: 'offers/:id', 
+        element: <DisplayOffer />
+    },
     {
         path: '/',
         element: <AuthRoute />,
         children: [
             { path: 'profile', element: <Profile /> },
             { path: 'myoffers', element: <MyOffers /> },
-            { path: 'offers/:id', element: <DisplayOffer /> },
             { path: 'profile/:id', element: <UserProfile /> },
             { 
                 path: '/',

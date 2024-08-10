@@ -52,6 +52,7 @@ function Workers() {
                     </div>
                     : 
                     <div>
+                        {employers.length > 0 ? <div>
                         <div className="flex justify-center mt-14">
                             <div className="relative w-3/4 lg:w-1/2">
                                 <input
@@ -83,7 +84,7 @@ function Workers() {
                                     </div>
                                 </li>
                             ))}
-                        </ul>
+                        </ul> </div> : <p className='text-white font-open text-2xl text-center my-20'>Nema radnika</p>}
                     </div>
                 }
             </div>

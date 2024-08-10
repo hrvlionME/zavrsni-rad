@@ -82,6 +82,7 @@ function AllOffers() {
                     </div>
                     : 
                     <div>
+                            {offers.length > 0 ? <div>
                         <div className="flex justify-center mt-14">
                             <div className="relative w-3/4 lg:w-1/2">
                                 <input
@@ -94,25 +95,23 @@ function AllOffers() {
                                 <FiSearch className="absolute left-3 top-2/4 transform -translate-y-2/4 text-primary-base text-2xl" />
                             </div>
                         </div>
+                    
                         <ul className="mt-8">
                             <li className='bg-primary-base py-4 my-4 px-20 mx-10 lg:mx-32 rounded-md flex justify-center lg:justify-between'> 
                                 <p className='text-white font-open text-2xl'>Naslov oglasa</p>
-                                <div className="w-1/4 hidden lg:flex justify-around items-center">
+                                <div className="w-1/2 hidden lg:flex justify-around items-center">
                                     <p className='text-white font-open text-2xl'>Poslodavac</p>
-                                    <span className='text-white font-open text-2xl'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                        </svg>
-                                    </span>
-                                    <span className='text-white font-open text-2xl'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                        </svg>
-                                    </span>
-                                    {user.role === "poslodavac" ? <p className='text-white font-open text-2xl'>Akcije</p> : null}
+                                    <div className='flex items-center'>
+                                                <span className='text-white font-open text-2xl ml-2'>Pratitelji</span>
+                                            </div>
+                                            <div className='flex items-center'>
+                                                <span className='text-white font-open text-2xl ml-2'>Prijave</span>
+                                            </div>
+                                    {user?.role === "poslodavac" ? <p className='text-white font-open text-2xl'>Akcije</p> : null}
                                 </div>
                             </li>
+                  
+                        
                             {offers.filter(offer => {
                                 const titleMatch = offer.title.toLowerCase().includes(searchTerm.toLowerCase());
                                 const tagMatch = offer.tags.some(tag => tag.name.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -120,11 +119,11 @@ function AllOffers() {
                             }).map((offer, index) => (
                                 <li key={index} className='bg-gray-200 py-4 my-4 px-20 mx-10 lg:mx-32 rounded-md shadow-md flex justify-center lg:justify-between'> 
                                     <Link to={`/offers/${offer.id}`} className='text-primary-base font-open text-2xl hover:underline'>{offer.title}</Link>
-                                    <div className="w-1/4 hidden lg:flex lg:justify-around">
-                                        <p className='text-primary-base font-open text-2xl'>{getEmployerName(offer.employer_id)}</p>
+                                    <div className="w-1/2 hidden lg:flex lg:justify-around">
+                                        <p className='text-primary-base font-open text-2xl max-w-[100px] break-words'>{getEmployerName(offer.employer_id)}</p>
                                         <span className='text-primary-base font-open text-2xl'>{offer.followers}</span>
                                         <span className='text-primary-base font-open text-2xl'>{offer.applications}</span>
-                                        {user.role === "poslodavac" && user.id === offer.employer_id ? (
+                                        {user?.role === "poslodavac" && user.id === offer.employer_id ? (
                                             <div className='bg-red-500 rounded-full hover:bg-red-700 cursor-pointer h-8 w-8 flex items-center justify-center' onClick={() => confirmDeleteOffer(offer.id)}>
                                                 <FiMinusCircle className='text-white font-open text-2xl' /> 
                                             </div>
@@ -132,11 +131,11 @@ function AllOffers() {
                                     </div>
                                 </li>
                             ))}
-                        </ul>
+                        </ul></div> : <p className='text-white font-open text-2xl text-center my-20'>Nema oglasa</p>}
                     </div>
                 }
             </div>
-            {user.role === "poslodavac" ?
+            {user?.role === "poslodavac" ?
                 <div className="fixed bottom-4 right-4 z-50">
                     <div className="relative group">
                         <Link
