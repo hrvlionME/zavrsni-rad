@@ -94,7 +94,7 @@ const deleteOffer = () => {
                   <img
                     src={employer && employer.avatar ? `http://127.0.0.1:8000/api/images/${employer.avatar}` : photo}
                     alt="Pogreska kod ucitavanja slike"
-                    className="w-24 h-24 rounded-full"
+                    className="w-24 h-24 rounded-full object-cover"
                   />
                   <div className="flex flex-col mx-4 text-left">
                     <h1 className="text-black font-open text-xl font-semibold">

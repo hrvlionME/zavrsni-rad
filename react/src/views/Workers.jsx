@@ -23,6 +23,10 @@ function Workers() {
         });
     };
 
+    const truncateText = (text, maxLength) => {
+        return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+    };
+
     const fetchOffers = async () => {
         setLoading(true);
         await axiosClient.get("/users").then(({ data }) => {
@@ -80,7 +84,7 @@ function Workers() {
                                 <li key={index} className='bg-gray-200 py-4 my-4 px-20 mx-10 lg:mx-32 rounded-md shadow-md flex justify-center lg:justify-between'> 
                                     <Link to={`/profile/${employer.id}`} className='text-primary-base font-open text-2xl hover:underline'>{employer.name}</Link>
                                     <div className="w-1/4 hidden lg:flex lg:justify-around">
-                                        <p className='text-primary-base font-open text-2xl'>{employer.description}</p>
+                                        <p className='text-primary-base font-open text-2xl'> {truncateText(employer.description, 30)}</p>
                                     </div>
                                 </li>
                             ))}

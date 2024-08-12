@@ -75,7 +75,7 @@ function Profile() {
                         </div> 
                         : 
                         <div className='flex items-center justify-center my-32'>
-                            <img src={user.avatar ? `http://127.0.0.1:8000/api/images/${user.avatar}` : photo} alt="Pogreska kod ucitavanja slike" className="w-36 h-36 rounded-full ml-8"/>
+                            <img src={user.avatar ? `http://127.0.0.1:8000/api/images/${user.avatar}` : photo} alt="Pogreska kod ucitavanja slike" className="w-36 h-36 rounded-full ml-8 object-cover"/>
                             <div className="flex flex-col mx-10">
                                 <h1 className='text-white font-open text-xl font-semibold'>{user.name}</h1>
                                 <h2 className='text-white font-open text-md'>{user.description}</h2>

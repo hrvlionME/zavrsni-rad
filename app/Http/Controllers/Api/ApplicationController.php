@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicationRequest;
 use App\Http\Resources\ApplicationResource;
+use App\Mail\NotificationMail;
 use App\Models\Application;
 use App\Models\Offer;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
@@ -16,6 +19,10 @@ class ApplicationController extends Controller
         Application::create($request->all());
         $offer = Offer::find($request->input('offer_id'));
         $offer->increment('applications');
+
+        $email = User::find($offer->user_id)->email;
+        Mail::to($email)->send(new NotificationMail());
+
         return response()->json(['Application created successfully']);
     }
 
