@@ -127,7 +127,7 @@ function AllOffers() {
                                             <div className='bg-red-500 rounded-full hover:bg-red-700 cursor-pointer h-8 w-8 flex items-center justify-center' onClick={() => confirmDeleteOffer(offer.id)}>
                                                 <FiMinusCircle className='text-white font-open text-2xl' /> 
                                             </div>
-                                        ) : null}
+                                        ) : user?.role === "poslodavac" ? <div className="h-8 w-8"></div> : null}
                                     </div>
                                 </li>
                             ))}

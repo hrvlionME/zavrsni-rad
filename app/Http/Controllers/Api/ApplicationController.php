@@ -21,7 +21,7 @@ class ApplicationController extends Controller
         $offer->increment('applications');
 
         $email = User::find($offer->user_id)->email;
-        Mail::to($email)->send(new NotificationMail());
+        Mail::to($email)->send(new NotificationMail(User::find($offer->user_id)->name, $offer->title));
 
         return response()->json(['Application created successfully']);
     }
