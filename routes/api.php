@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/isfollowing/{id}', [FollowingController::class, 'isfollowing']);
     Route::delete('/offer/{id}', [OfferController::class, 'deleteoffer']);
     Route::patch('/offer/{id}', [OfferController::class, 'updateoffer']);
+    Route::patch('/user/{id}', [AuthController::class, 'updateuser']);
     Route::post('/offer/{id}/apply', [ApplicationController::class, 'apply']);
     Route::get('/applications', [ApplicationController::class, 'show']);
     Route::delete('/application/{id}', [ApplicationController::class, 'delete']);
@@ -38,6 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/user/{id}', [AuthController::class, 'getuser']);
     Route::get('/getuseroffers/{id}', [OfferController::class, 'showfromuser']);
     Route::get('/getfollowingoffers/{id}', [OfferController::class, 'showfollowingfromuser']);
+    Route::delete('/user/{id}', [AuthController::class, 'deleteuser']);
 });
 
 Route::get('/usertags/{user}', [TagController::class, 'show']);
@@ -48,6 +50,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/uploadavatar', [FilesController::class, 'store']);
 Route::get('/offer/{id}', [OfferController::class, 'getoffer']);
 Route::get('/getoffertags/{id}', [TagController::class, 'getoffertags']);
+Route::get('/getusertags/{id}', [TagController::class, 'getusertags']);
 
 Route::get('/images/{filename}', function ($filename) {
     $path = storage_path('app/public/' . $filename);

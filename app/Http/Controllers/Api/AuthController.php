@@ -79,4 +79,16 @@ class AuthController extends Controller
         $user = User::with('tags')->find($id);
         return new UserResource($user);
     }
+
+    public function deleteuser($id){
+        $user = User::find($id);
+        $user->delete();
+        return response('', 204);
+    }
+
+    public function updateuser($id){
+        $user = User::find($id);
+        $user->update(request()->all());
+        return new UserResource($user);
+    }
 }

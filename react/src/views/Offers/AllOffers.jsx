@@ -107,7 +107,7 @@ function AllOffers() {
                                             <div className='flex items-center'>
                                                 <span className='text-white font-open text-2xl ml-2'>Prijave</span>
                                             </div>
-                                    {user?.role === "poslodavac" ? <p className='text-white font-open text-2xl'>Akcije</p> : null}
+                                    {user?.role === "poslodavac" || user?.role === "adminstrator" ? <p className='text-white font-open text-2xl'>Akcije</p> : null}
                                 </div>
                             </li>
                   
@@ -123,7 +123,7 @@ function AllOffers() {
                                         <p className='text-primary-base font-open text-2xl max-w-[100px] break-words'>{getEmployerName(offer.employer_id)}</p>
                                         <span className='text-primary-base font-open text-2xl'>{offer.followers}</span>
                                         <span className='text-primary-base font-open text-2xl'>{offer.applications}</span>
-                                        {user?.role === "poslodavac" && user.id === offer.employer_id ? (
+                                        {(user?.role === "poslodavac" && user.id === offer.employer_id) || user?.role === "adminstrator" ? (
                                             <div className='bg-red-500 rounded-full hover:bg-red-700 cursor-pointer h-8 w-8 flex items-center justify-center' onClick={() => confirmDeleteOffer(offer.id)}>
                                                 <FiMinusCircle className='text-white font-open text-2xl' /> 
                                             </div>

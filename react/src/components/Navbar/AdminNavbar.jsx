@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FiSearch } from 'react-icons/fi';
 
-function EmployerNavbar() {
+function AdminNavbar() {
 
   const [isClicked, setIsClicked] = useState(false);
   const { user, token, setUser, setToken, } = useStateContext();
@@ -70,16 +70,9 @@ function EmployerNavbar() {
               {isClicked && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                   <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJ PROFIL</Link>
-                  <Link to="/notifications" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 justify-between">OBAVIJESTI
-                  { applications.length > 0 &&
-                    <div className='bg-secondary-base rounded-full px-2'>
-                      <p className="text-white inline">{applications.length}</p>
-                    </div> }
-                  </Link>
                   <Link to="/workers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">PRETRAGA RADNIKA</Link>
                   <Link to="/offers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">OGLASI</Link>
-                  <Link to="/myoffers" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJI OGLASI</Link>
-                  <Link to="/addjob" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">NAPRAVI OGLAS</Link>
+                  <Link to="/admin/users" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ADMIN PANEL</Link>
                   <Link to="/logout" onClick={onLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ODJAVA</Link>
                 </div>
               )}
@@ -92,4 +85,4 @@ function EmployerNavbar() {
   )
 }
 
-export default EmployerNavbar
+export default AdminNavbar

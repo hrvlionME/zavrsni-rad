@@ -16,6 +16,8 @@ import ShowApplication from "./views/ShowApplication";
 import Workers from "./views/Workers";
 import UserProfile from "./views/UserProfile";
 import { AuthRoute, NonAuthRoute, RoleRoute } from "./ProtectedRoute";
+import AdminPanel from "./views/AdminPanel";
+import EditUser from "./views/EditUser";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +63,15 @@ const router = createBrowserRouter([
                 children: [
                     { path: 'offers/following', element: <FollowingOffers /> },
                     { path: 'offers/:id/apply', element: <SendApplication /> },
+                ]
+            },
+            { 
+                path: '/',
+                element: <RoleRoute role="adminstrator" />,
+                children: [
+                    { path: 'admin/:content', element: <AdminPanel /> },
+                    { path: 'admin/offers/:id/edit', element: <EditJob /> },
+                    { path: 'admin/users/:id/edit', element: <EditUser /> },
                 ]
             }
         ]

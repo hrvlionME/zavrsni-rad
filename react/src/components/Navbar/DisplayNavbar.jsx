@@ -5,6 +5,7 @@ import WorkerNavbar from './WorkerNavbar';
 import EmployerNavbar from './EmployerNavbar';
 import Navbar from './Navbar';
 import { ThreeDots } from 'react-loader-spinner';
+import AdminNavbar from './AdminNavbar';
 
 
 function DisplayNavbar() {
@@ -43,7 +44,7 @@ function DisplayNavbar() {
                     />
                 </div>
             ) :
-            user?.role == "poslodavac" ? <EmployerNavbar /> : user?.role == "radnik" ? <WorkerNavbar/> : <Navbar/>}
+            user?.role == "poslodavac" ? <EmployerNavbar /> : user?.role == "radnik" ? <WorkerNavbar/> : user?.role == "adminstrator" ? <AdminNavbar/> : <Navbar/>}
         </>
     )
 }

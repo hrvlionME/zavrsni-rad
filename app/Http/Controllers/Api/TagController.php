@@ -40,4 +40,9 @@ class TagController extends Controller
         return response()->json(['tags' => $tags]);
     }
 
+    public function getusertags($id){
+        $tags = User::find($id)->tags;
+        return response()->json(['tags' => $tags]);
+    }
+
 }

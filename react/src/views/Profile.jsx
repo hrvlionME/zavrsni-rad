@@ -89,7 +89,7 @@ function Profile() {
                     }
                     <div className='flex items-center justify-around'>
                         <div className='bg-gray-200 py-4 w-1/2 px-8 rounded-md shadow-md'> 
-                        <p className='text-primary-base font-bold text-2xl text-center'>{user.role === "poslodavac" ? "Oglasi" : "Praćeni Oglasi"}</p>
+                        <p className='text-primary-base font-bold text-2xl text-center'>{user.role === "poslodavac" ? "Oglasi" : user.role == "radnik" ? "Praćeni Oglasi" : "Administrator"}</p>
                             <div className='flex flex-col items-start'>
                                 {offers.map(offer => (
                                     <Link key={offer.id} to={`/offers/${offer.id}`} className='text-primary-base text-lg text-left py-3 hover:underline'>
