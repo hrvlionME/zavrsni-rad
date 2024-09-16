@@ -44,7 +44,7 @@ function DisplayNavbar() {
                     />
                 </div>
             ) :
-            user?.role == "poslodavac" ? <EmployerNavbar /> : user?.role == "radnik" ? <WorkerNavbar/> : user?.role == "adminstrator" ? <AdminNavbar/> : <Navbar/>}
+            user?.role == "poslodavac" ? <EmployerNavbar /> : user?.role == "radnik" ? <WorkerNavbar/> : user?.role == "administrator" ? <AdminNavbar/> : <Navbar/>}
         </>
     )
 }

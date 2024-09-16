@@ -52,7 +52,7 @@ function WorkerNavbar() {
           <h1 className="text-gray-100 font-content text-center font-bold text-lg">TražimPosao</h1>
         </div>
           <div className="flex items-center">
-            <span className="text-gray-100 mr-2">Logged in as {user.name}</span>
+            <span className="text-gray-100 mr-2">Prijavljeni ste kao {user.name}</span>
             <div className="relative">
               <button onClick={handleToggle} className="rounded-full overflow-hidden h-10 w-10 bg-gray-300 flex items-center justify-center">
                 <img src={user.avatar ? `http://127.0.0.1:8000/api/images/${user.avatar}` : photo} alt="User Avatar" className="h-full w-full object-cover" />

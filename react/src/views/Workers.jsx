@@ -62,7 +62,7 @@ function Workers() {
                                 <input
                                     type="text"
                                     className="w-full px-4 py-2 pl-10 pr-4 text-2xl bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-primary-base"
-                                    placeholder="Pretraži oglase..."
+                                    placeholder="Pretraži radnike..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />

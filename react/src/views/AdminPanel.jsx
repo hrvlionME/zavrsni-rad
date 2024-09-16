@@ -100,7 +100,7 @@ function AdminPanel() {
                   key={user.id}
                   className="bg-gray-200 mb-5 py-4 my-4 pl-20 pr-10 mx-10 lg:mx-32 rounded-md flex justify-between items-center"
                 >
-                  <p className="text-xl text-primary-base max-w-[100px] break-words">{user.name}</p>
+                  <p className="text-xl text-primary-base max-w-[110px] break-words">{user.name}</p>
                   <p className="text-xl text-primary-base">{user.email}</p>
                   <p className="text-xl text-primary-base">{user.role}</p>
                   <div className="flex gap-x-3 justify-center items-center">

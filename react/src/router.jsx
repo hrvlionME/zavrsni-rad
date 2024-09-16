@@ -67,7 +67,7 @@ const router = createBrowserRouter([
             },
             { 
                 path: '/',
-                element: <RoleRoute role="adminstrator" />,
+                element: <RoleRoute role="administrator" />,
                 children: [
                     { path: 'admin/:content', element: <AdminPanel /> },
                     { path: 'admin/offers/:id/edit', element: <EditJob /> },

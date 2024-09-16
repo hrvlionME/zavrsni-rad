@@ -28,11 +28,11 @@ function LandingPage() {
             Vaša potraga za savršenim poslom počinje ovdje. Pronađite idealnu priliku već danas!
           </h3>
           <div className='flex justify-center items-center gap-x-5 animate__animated animate__fadeIn animate__delay-3s'>
-            <Link className="text-white bg-secondary-base px-4 lg:px-6 py-2 rounded-md font-open text-xl my-2 lg:my-10 mx-2 lg:mx-5" to="/offers">Pregledaj Oglase</Link>
+            <Link className="text-white text-center bg-secondary-base px-4 lg:px-6 py-2 rounded-md font-open text-xl my-2 lg:my-10 mx-2 lg:mx-5" to="/offers">Pregledaj Oglase</Link>
             {userLoggedIn ? (
-              <Link className="text-white bg-secondary-base px-4 lg:px-6 py-2 rounded-md font-open text-xl my-2 lg:my-10 mx-2 lg:mx-5" to="/register">Pronađi posao ili radnika</Link>
+              <Link className="text-white text-center bg-secondary-base px-4 lg:px-6 py-2 rounded-md font-open text-xl my-2 lg:my-10 mx-2 lg:mx-5" to="/register">Pronađi posao ili radnika</Link>
             ) : (
-              <Link className="text-white bg-secondary-base px-4 lg:px-6 py-2 rounded-md font-open text-xl my-2 lg:my-10 mx-2 lg:mx-5" to="/workers">Pronađi posao ili radnika</Link>
+              <Link className="text-white text-center bg-secondary-base px-4 lg:px-6 py-2 rounded-md font-open text-xl my-2 lg:my-10 mx-2 lg:mx-5" to="/workers">Pronađi posao ili radnika</Link>
             )}
           </div>
         </div>

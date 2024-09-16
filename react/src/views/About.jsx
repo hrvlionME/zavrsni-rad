@@ -9,7 +9,7 @@ function About() {
   return (
     <>
     <DisplayNavbar/>
-    <div className="absolute inset-0 -z-10 h-full w-full bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)]">
+            <div className="fixed inset-0 -z-10 bg-primary-base [background:radial-gradient(125%_125%_at_50%_10%,#265073_40%,#2D9596_100%)]"></div>
             <div className='flex flex-col justify-center w-7/12 h-screen mx-auto'>
             <div className='flex justify-center items-center'>
                 <FiSearch className='text-white text-5xl mr-2' />
@@ -23,7 +23,7 @@ function About() {
 <h2 className='text-justify font-content text-white text-lg m-2'>Personalizirani pristup: Uživajte u personaliziranim preporukama posla na temelju vaših preferencija i prethodnog iskustva.</h2>
 <h3 className='text-center font-content text-white text-xl mt-32'>Hvala vam što ste odabrali TražimPosao kao vašeg partnera u traženju posla. Radujemo se što ćemo vam pomoći na putu do vaše sljedeće velike prilike!</h3>
             </div>
-        </div>
+      
     </>
   )
 }

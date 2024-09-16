@@ -62,7 +62,7 @@ function EmployerNavbar() {
           <h1 className="text-gray-100 font-content text-center font-bold text-lg">TražimPosao</h1>
         </div>
           <div className="flex items-center">
-            <span className="text-gray-100 mr-2">Logged in as {user.name}</span>
+            <span className="text-gray-100 mr-2">Prijavljeni ste kao {user.name}</span>
             <div className="relative">
               <button onClick={handleToggle} className="rounded-full overflow-hidden h-10 w-10 bg-gray-300 flex items-center justify-center">
                 <img src={user.avatar ? `http://127.0.0.1:8000/api/images/${user.avatar}` : photo} alt="User Avatar" className="h-full w-full object-cover" />
@@ -70,7 +70,7 @@ function EmployerNavbar() {
               {isClicked && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                   <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MOJ PROFIL</Link>
-                  <Link to="/notifications" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 justify-between">OBAVIJESTI
+                  <Link to="/notifications" className="flex px-4 py-2 text-gray-800 hover:bg-gray-200 justify-between">OBAVIJESTI
                   { applications.length > 0 &&
                     <div className='bg-secondary-base rounded-full px-2'>
                       <p className="text-white inline">{applications.length}</p>
